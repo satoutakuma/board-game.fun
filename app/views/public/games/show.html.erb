@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= image_tag @game.customer.get_profile_image(100,100) %><br>
+      <%= link_to games_path(@users) do %>
+        <%= @users.name %>
+      <% end %>
+    </div>
+    <div class="col">
+        <h3><strong><%=@game.title%></strong></h3>
+        <h4>参加可能人数<%=players_range(@game.min_players, @game.max_players) %></h4>
+        <h5><%=@game.body%></h5>
+         <% if @game.customer == current_customer %>
+          <%= link_to "edit", edit_game_path(@game.id), class: "btn btn-success" %>
+         <% end %>
+         <% if @game.customer == current_customer %>
+          <%= link_to "Destroy", game_path(@game.id), class: "btn btn-danger", method: :delete, "data-confirm" => "Are you sure?" %>
+         <% end %>
+    </div>
+  </div>
+</div>

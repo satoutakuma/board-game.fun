@@ -1,0 +1,28 @@
+<div class="col-md-8 offset-md-1">
+ <h2>オススメ一覧</h2>
+  <table class="table table-striped">
+   <thead>
+    <tr>
+     <th class="header1"></th>
+     <th class="header2">ゲーム名</th>
+     <th class="header3">参加可能人数</th>
+    </tr>
+   </thead>
+   <tbody>
+    <% @games.each do |game| %>
+     <tr>
+      <td>
+       <%= link_to customer_path(@user) do %>
+         <%= image_tag @user.get_profile_image(100,100) %></td>
+       <% end %>
+      <td>
+       <%= link_to game_path(game.id) do %>
+        <%=game.title%>
+       <% end %>
+      </td>
+      <td><%= players_range(game.min_players, game.max_players) %></td>
+     </tr>
+    <% end %>
+   </tbody>
+  </table>
+</div>
