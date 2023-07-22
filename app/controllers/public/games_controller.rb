@@ -61,8 +61,8 @@ class Public::GamesController < ApplicationController
   end
 
   def is_matching_login_customer
-    customer = Customer.find(params[:id])
-    unless customer.id == current_customer.id
+    game = Game.find(params[:id])
+    unless game.customer == current_customer
       redirect_to games_path
     end
   end

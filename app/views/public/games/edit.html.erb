@@ -1,2 +1,27 @@
-<h1>Public::Games#edit</h1>
-<p>Find me in app/views/public/games/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>内容の編集</h1>
+      <% if @game.errors.any? %>
+        <%= @game.errors.count %>errors prohibited this book from being saved
+        <ul>
+          <% @game.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <%= form_with model: @game do |f| %>
+        <h4>ゲーム名</h4>
+        <%= f.text_field :title %>
+        <h4>最大参加人数</h4>
+        <%= f.number_field :max_players, in: 1..100 %>人
+        <h4>最少参加人数</h4>
+        <%= f.number_field :min_players, in: 1..100 %>人
+        <h4>ルール説明とアピールポイント</h4>
+        <%= f.text_area :body, rows: 20, cols: 160%>
+        <p><%= f.submit '内容の変更' %></p>
+      <% end %>
+      <p><%= link_to "戻る", game_path(@game.id) %>|<%= link_to "投稿一覧へ", games_path %></p>
+    </div>
+  </div>
+</div>
