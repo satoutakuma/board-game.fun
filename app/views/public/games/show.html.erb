@@ -1,21 +1,68 @@
 <div class="container">
   <div class="row mb-4">
     <div class="col-md-2">
-      <%= image_tag @game.customer.get_profile_image(100,100) %><br>
-      <%= link_to customer_path(@users) do %>
+      <%= image_tag @game.customer.get_profile_image(100, 100) %><br>
+      <%= link_to games_path(@users) do %>
         <%= @users.name %>
       <% end %>
     </div>
     <div class="col-md-10">
-        <h3><strong><%=@game.title%></strong></h3>
-        <h4>参加可能人数<%=players_range(@game.min_players, @game.max_players) %></h4>
-        <h5><%= simple_format(@game.body) %></h5>
-         <% if @game.customer == current_customer %>
-          <%= link_to "edit", edit_game_path(@game.id), class: "btn btn-success" %>
-         <% end %>
-         <% if @game.customer == current_customer %>
-          <%= link_to "Destroy", game_path(@game.id), class: "btn btn-danger", method: :delete, "data-confirm" => "Are you sure?" %>
-         <% end %>
+      <h3><strong><%=@game.title%></strong></h3>
+      <h4>参加可能人数<%=players_range(@game.min_players, @game.max_players) %></h4>
+      <h5><%= simple_format(@game.body) %></h5>
+      <% if @game.customer == current_customer %>
+        <%= link_to "投稿編集", edit_game_path(@game.id), class: "btn btn-success" %>
+        <%= link_to "投稿削除", game_path(@game.id), class: "btn btn-danger", method: :delete, "data-confirm" => "本当に消しますか？" %>
+      <% else %>
+        <td id="favorite_buttons_<%= @game.id %>" >
+          <span id="favorite_buttons_<%= @game.id %>"><%= render "public/favorites/favorite", game: @game %></span>
+        </td>
+      <% end %>
+      <p>コメント件数：<%= @game.game_comments.count %></p>
+
+      <table class='table'>
+        <% @game.game_comments.each do |game_comment| %>
+          <tr>
+            <td><%= image_tag game_comment.customer.get_profile_image(100, 100) %><br>
+              <%= game_comment.customer.name %>
+            </td>
+            <td><%= game_comment.comment %></td>
+            <td>
+              <% if game_comment.customer == current_customer %>
+                <%= link_to "コメント削除", game_game_comments_path(game_comment.game, game_comment), method: :delete %>
+              <% else %>
+                <%= link_to "返信", game_game_comments_path(game_comment.game, game_comment) %>
+              <% end %>
+            </td>
+          </tr>
+          <% game_comment.replies.each do |reply| %>
+            <tr>
+              <td><%= image_tag reply.customer.get_profile_image(100, 100) %><br>
+                <%= reply.customer.name %>
+              </td>
+              <td><%= reply.comment %></td>
+              <td>
+                <% if reply.customer == current_customer %>
+                  <%= link_to "コメント削除", game_game_comments_path(game_comment.game, reply), method: :delete %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan="3">
+              <%= form_with model: [@game, GameComment.new], url: create_reply_game_path(@game, game_comment), local: true do |f| %>
+              <%= hidden_field_tag("game_comment_id", game_comment.id) %>
+                <%= f.text_area :comment, rows: '2', placeholder: "返信をここに" %>
+                <%= f.submit "返信する" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <div>
+        <%= render 'comment_form' %>
+      </div>
     </div>
   </div>
 </div>
+

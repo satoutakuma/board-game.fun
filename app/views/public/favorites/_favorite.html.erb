@@ -1,0 +1,13 @@
+<% if game.favorited_by?(current_customer) %>
+ <span>
+   <%= link_to game_favorites_path(game), method: :delete, remote: true, data: {"turbolinks" => false} do %>
+    ♥<%= game.favorites.count %> いいね
+   <% end %>
+ </span>
+<% else %>
+ <span>
+   <%= link_to game_favorites_path(game.id), method: :post, remote: true, data: {"turbolinks" => false} do %>
+    ♡<%= game.favorites.count %> いいね
+   <% end %>
+ </span>
+<% end %>

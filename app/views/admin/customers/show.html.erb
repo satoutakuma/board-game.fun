@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row my-3">
+    <div class="col-sm-8 px-sm-0 offset-sm-1">
+      <h2><%= @customer.name %>さんの会員詳細</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 px-sm-0 offset-sm-1">
+      <table class="table table-bordered">
+        <tr>
+          <th>会員ID</th>
+          <td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <th>氏名</th>
+          <td><%= @customer.name %></td>
+        </tr>
+        <tr>
+          <th>会員ステータス</th>
+          <td>
+            <% if @customer.is_active == true %>
+              <p class="text-success font-weight-bold">有効</p>
+            <% else %>
+              <p class="text-secondary">退会</p>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-lg-6 px-sm-0 offset-sm-1">
+      <%= link_to "編集する", edit_admin_customer_path(@customer.id), class:"btn btn-success my-1 mx-4 px-4" %>
+      <%= link_to "会員一覧に戻る", admin_customers_path(id: @customer), class:"btn btn-primary mx-4 px-4" %>
+    </div>
+  </div>
+</div>

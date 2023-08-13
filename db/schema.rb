@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_16_064340) do
+ActiveRecord::Schema.define(version: 2023_07_29_101426) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -67,10 +67,39 @@ ActiveRecord::Schema.define(version: 2023_07_16_064340) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "game_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_favorites_on_customer_id"
+    t.index ["game_id"], name: "index_favorites_on_game_id"
+  end
+
+  create_table "game_comments", force: :cascade do |t|
+    t.text "comment", limit: 1000, default: "", null: false
+    t.text "game_comment", limit: 1000, default: "", null: false
+    t.integer "customer_id"
+    t.integer "game_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "game_replies", force: :cascade do |t|
+    t.integer "game_comment_id"
+    t.integer "customer_id"
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_game_replies_on_customer_id"
+    t.index ["game_comment_id"], name: "index_game_replies_on_game_comment_id"
+  end
+
   create_table "games", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
     t.integer "customer_id", null: false
+    t.integer "game_id"
     t.integer "max_players"
     t.integer "min_players"
     t.datetime "created_at", precision: 6, null: false
@@ -79,4 +108,8 @@ ActiveRecord::Schema.define(version: 2023_07_16_064340) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorites", "customers"
+  add_foreign_key "favorites", "games"
+  add_foreign_key "game_replies", "customers"
+  add_foreign_key "game_replies", "game_comments"
 end

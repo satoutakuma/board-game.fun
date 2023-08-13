@@ -24,10 +24,6 @@
             <ul class="navbar-nav ml-auto">
               <% if admin_signed_in? %>
               <li class="nav-item mr-3">
-                <%= link_to "投稿一覧", admin_games_path, class: "btn btn-outline-dark nav-link text-dark" %>
-              </li>
-
-              <li class="nav-item mr-3">
                 <%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-dark nav-link text-dark" %>
               </li>
 
@@ -41,7 +37,7 @@
               </li>
 
               <li class="nav-item mr-3">
-                <%= link_to "マイページ", customer_path(current_customer.id), class: "btn btn-outline-dark nav-link text-dark" %>
+                <%= link_to "マイページ", games_path(current_customer.id), class: "btn btn-outline-dark nav-link text-dark" %>
               </li>
 
               <li class="nav-item mr-3">

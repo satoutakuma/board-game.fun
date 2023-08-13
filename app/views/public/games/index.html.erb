@@ -1,4 +1,9 @@
 <div class="col-md-8 offset-md-1">
+	<%= form_tag sort_by_players_range_games_path, method: :get do %>
+	  最小参加人数：<%= number_field_tag :min_players %>
+	  最大参加人数：<%= number_field_tag :max_players %>
+	  <%= submit_tag "絞り込む" %>
+  <% end %>
 	<h2>投稿一覧</h2>
 	 <table class="table table-hoble-hover table-inverse">
 		 <thead>
@@ -13,8 +18,8 @@
 			  <% @games.each do |game| %>
 			  <tr>
 			   <td>
-			   	<%= link_to customer_path(game.id) do %>
-
+			   	<%= link_to games_path(game.id) do %>
+            <%= image_tag game.customer.get_profile_image(50,50) %>
 			    <% end %>
 			   </td>
 			   <td>
@@ -23,6 +28,10 @@
 				<% end %>
 				 </td>
 				<td><%= players_range(game.min_players, game.max_players) %></td>
+				<td>
+          <span id="favorite_buttons_<%= game.id %>"><%= render "public/favorites/favorite", game: game %></span>
+        </td>
+        <td><%= link_to "#{game.game_comments.count} コメント", game_path(game.id) %></td>
 			  </tr>
 	        <% end %>
 		  </tbody>

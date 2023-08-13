@@ -1,0 +1,15 @@
+<div>
+ <table class='table'>
+ <% game.game_comments.each do |game_comment| %>
+  <tr>
+   <td><%= image_tag game_comment.customer.get_profile_image(100,100) %><br>
+       <%= game_comment.customer.name %>
+   </td>
+   <td><%= game_comment.comment %></td>
+   <td><% if game_comment.customer == current_customer %>
+        <%= link_to "削除", game_game_comment_path(game_comment.game, game_comment), method: :delete, remote: true, data: {"turbolinks" => false} %>
+      <% end %>
+   </td>
+  </tr>
+ <% end %>
+</div>
