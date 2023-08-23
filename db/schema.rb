@@ -92,8 +92,6 @@ ActiveRecord::Schema.define(version: 2023_08_16_114156) do
     t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_game_replies_on_customer_id"
-    t.index ["game_comment_id"], name: "index_game_replies_on_game_comment_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -111,7 +109,4 @@ ActiveRecord::Schema.define(version: 2023_08_16_114156) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "favorites", "customers"
   add_foreign_key "favorites", "games"
-  add_foreign_key "game_comments", "game_comments", column: "reply_comment_id"
-  add_foreign_key "game_replies", "customers"
-  add_foreign_key "game_replies", "game_comments"
 end
