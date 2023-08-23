@@ -2,7 +2,7 @@
   <div class="row mb-4">
     <div class="col-md-2">
       <%= image_tag @game.customer.get_profile_image(100, 100) %><br>
-      <%= link_to games_path(@users) do %>
+      <%= link_to customer_path(@users) do %>
         <%= @users.name %>
       <% end %>
     </div>
@@ -29,7 +29,7 @@
             <td><%= game_comment.comment %></td>
             <td>
               <% if game_comment.customer == current_customer %>
-                <%= link_to "コメント削除", game_game_comments_path(game_comment.game, game_comment), method: :delete %>
+                <%= link_to "コメント削除", game_game_comment_path(game_comment.game, game_comment), method: :delete %>
               <% else %>
                 <%= link_to "返信", game_game_comments_path(game_comment.game, game_comment) %>
               <% end %>
@@ -43,14 +43,14 @@
               <td><%= reply.comment %></td>
               <td>
                 <% if reply.customer == current_customer %>
-                  <%= link_to "コメント削除", game_game_comments_path(game_comment.game, reply), method: :delete %>
+                  <%= link_to "コメント削除", game_game_reply_path(game_comment.game,reply ), method: :delete %>
                 <% end %>
               </td>
             </tr>
           <% end %>
           <tr>
             <td colspan="3">
-              <%= form_with model: [@game, GameComment.new], url: create_reply_game_path(@game, game_comment), local: true do |f| %>
+              <%= form_with model: [@game, GameReply.new], url: game_game_reply_index_path(@game, game_comment), local: true do |f| %>
               <%= hidden_field_tag("game_comment_id", game_comment.id) %>
                 <%= f.text_area :comment, rows: '2', placeholder: "返信をここに" %>
                 <%= f.submit "返信する" %>

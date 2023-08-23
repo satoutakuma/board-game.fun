@@ -9,6 +9,8 @@ class Public::GameCommentsController < ApplicationController
       else
         redirect_to new_customer_session_path
       end
+    else
+      redirect_to new_customer_registration_path
     end
   end
 

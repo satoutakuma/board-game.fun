@@ -19,7 +19,7 @@ class Public::GamesController < ApplicationController
   end
 
   def index
-    @games = Game.all
+    @games = Game.joins(:customer).where(customers: { is_active: true })
     @user = current_customer
     if params[:min_players].present? && params[:max_players].present?
       @games = @games.where("min_players <= ? AND max_players >= ?", params[:max_players], params[:min_players])
@@ -39,22 +39,6 @@ class Public::GamesController < ApplicationController
     render :index
   end
 
-  def create_reply
-    @game = Game.find(params[:id])
-    @parent_comment = GameComment.find(params[:game_comment_id])
-    @reply_comment = @parent_comment.replies.new(game_comment_params)
-    @reply_comment.customer = current_customer
-
-    if @reply_comment.save
-      redirect_to game_path(@game)
-    else
-      @new = Game.new
-      @user = current_customer
-      @users = @game.customer
-      @game_comment = GameComment.new
-      render "show"
-    end
-  end
 
   def show
     @game = Game.find(params[:id])
@@ -89,13 +73,12 @@ class Public::GamesController < ApplicationController
   	flash[:notice] = "Game was successfully destroyed."
   end
 
+
   private
   def game_params
   	params.require(:game).permit(:title, :body, :max_players, :min_players)
   end
-  def game_comment_params
-    params.require(:game_comment).permit(:comment, :game_comment)
-  end
+
 
   def is_matching_login_customer
     game = Game.find(params[:id])

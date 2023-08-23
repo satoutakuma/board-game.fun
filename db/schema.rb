@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_29_101426) do
+ActiveRecord::Schema.define(version: 2023_08_16_114156) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2023_07_29_101426) do
     t.integer "game_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "reply_comment_id"
   end
 
   create_table "game_replies", force: :cascade do |t|
@@ -110,6 +111,7 @@ ActiveRecord::Schema.define(version: 2023_07_29_101426) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "favorites", "customers"
   add_foreign_key "favorites", "games"
+  add_foreign_key "game_comments", "game_comments", column: "reply_comment_id"
   add_foreign_key "game_replies", "customers"
   add_foreign_key "game_replies", "game_comments"
 end

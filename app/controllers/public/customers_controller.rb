@@ -15,10 +15,14 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
     if @customer.update(customer_params)
       flash[:success] = "登録情報の更新が完了しました"
-      redirect_to customers_show_path
+      redirect_to customer_path
     else
       render :edit
     end
+  end
+
+  def unsubscribe
+    @customer = current_customer
   end
 
   def withdraw
@@ -36,8 +40,8 @@ class Public::CustomersController < ApplicationController
   end
 
   def is_matching_login_customer
-    customer = Customer.find(params[:game][:customer_id])
-    unless customer.id == current_user.id
+    customer = Customer.find(params[:id])
+    unless customer.id == current_customer.id
       redirect_to customer_path(current_customer.id)
     end
   end

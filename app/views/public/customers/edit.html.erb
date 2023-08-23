@@ -1,0 +1,12 @@
+<%= form_with model: @customer do |f| %>
+  <label for="inputName">Name</label><br>
+  <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"Name"%><br>
+  <label for="inputImage">ProfileImage</label><br>
+  <%= f.file_field :profile_image, placeholder: "Image", accept: "image/*" %><br>
+  <label for="inputImage">Introduction</label><br>
+  <%= f.text_area :introduction %><br>
+
+  <%= f.submit "編集内容を保存する", class: "btn btn-secondary" %>
+  <%= link_to "退会する", customer_unsubscribe_path(current_customer), class: "btn btn-danger" %>
+
+<% end %>

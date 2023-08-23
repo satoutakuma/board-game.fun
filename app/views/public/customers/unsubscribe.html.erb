@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <strong><h4>本当に退会しますか？</h4></strong>
+    </div>
+    <div class="col-md-12">
+      <p>
+        退会すると、会員登録情報や<br>
+        これまでの投稿内容が削除されます。<br>
+        退会する場合は、「退会する」をクリックしてください。
+      </p>
+    </div>
+    <div class="col-md-12">
+      <%= link_to "退会しない", root_path, class: "btn btn-primary" %>
+      <%= link_to "退会する", customer_withdraw_path, class: "btn btn-danger", method: :patch, data: { confirm: "本当に退会しますか？" } %>
+    </div>
+  </div>
+</div>

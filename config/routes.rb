@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :customers,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -8,7 +9,7 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   namespace :admin do
-    root to: "customer#index"
+    root to: "customers#index"
     resources :customers, only: [:index, :show, :edit, :update]
     resources :games, only: [:index, :show, :edit, :update]
   end
@@ -20,11 +21,12 @@ Rails.application.routes.draw do
         get :sort_by_players_range
       end
       resource :favorites, only: [:create, :destroy]
-      resource :game_comments, only: [:create, :destroy]
-        post 'create_reply', on: :member
+      resources :game_comments, only: [:create, :destroy]
+      resources :game_reply, only: [:create, :destroy]
     end
-    resources :game_comments, only: [:create, :destroy] do
-      post 'create_reply', on: :member
+    resources :customers, only: [:show, :edit, :update] do
+      get 'unsubscribe'
+      patch 'withdraw'
     end
   end
 end
