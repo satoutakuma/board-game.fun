@@ -77,8 +77,8 @@ ActiveRecord::Schema.define(version: 2023_08_16_114156) do
   end
 
   create_table "game_comments", force: :cascade do |t|
-    t.text "comment", limit: 1000, default: "", null: false
-    t.text "game_comment", limit: 1000, default: "", null: false
+    t.text "comment"
+    t.text "game_comment"
     t.integer "customer_id"
     t.integer "game_id"
     t.datetime "created_at", precision: 6, null: false
