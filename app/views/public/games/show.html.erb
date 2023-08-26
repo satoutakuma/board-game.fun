@@ -30,8 +30,6 @@
             <td>
               <% if game_comment.customer == current_customer %>
                 <%= link_to "コメント削除", game_game_comment_path(game_comment.game, game_comment), method: :delete %>
-              <% else %>
-                <%= link_to "返信", game_game_comments_path(game_comment.game, game_comment) %>
               <% end %>
             </td>
           </tr>

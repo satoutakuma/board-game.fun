@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "customers#index"
     resources :customers, only: [:index, :show, :edit, :update]
-    resources :games, only: [:index, :show, :edit, :update]
+    resources :games, only: [:index, :show]
+    resources :game_comments, only: [:destroy]
+      resources :game_reply, only: [:destroy]
   end
   scope module: 'public' do
     root to: "homes#top"
