@@ -3,7 +3,8 @@
 	  最小参加人数：<%= number_field_tag :min_players %>
 	  最大参加人数：<%= number_field_tag :max_players %>
 	  <%= submit_tag "絞り込む" %>
-  <% end %>
+	  <%= button_tag "リセット", type: :button, onclick: "resetFilters();" %>
+    <% end %>
 	<h2>投稿一覧</h2>
 	 <table class="table table-hoble-hover table-inverse">
 		 <thead>
@@ -37,3 +38,10 @@
 		  </tbody>
 	 </table>
 </div>
+<script>
+  function resetFilters() {
+    document.querySelector('#min_players').value = '';
+    document.querySelector('#max_players').value = '';
+    document.querySelector('form').submit();
+  }
+</script>
