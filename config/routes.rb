@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   end
   scope module: 'public' do
     root to: "homes#top"
-    get 'homes/about' => "homes#about"
     resources :games do
       collection do
         get :sort_by_players_range
