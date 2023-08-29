@@ -1,20 +1,26 @@
 Rails.application.routes.draw do
-
-  devise_for :customers,skip: [:passwords], controllers: {
+  devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
 
-  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
+
   namespace :admin do
     root to: "customers#index"
     resources :customers, only: [:index, :show, :edit, :update]
-    resources :games, only: [:index, :show]
+    resources :games, only: [:index, :show] do
+      collection do
+        get :sort_by_players_range
+      end
+    end
     resources :game_comments, only: [:destroy]
-      resources :game_reply, only: [:destroy]
+    resources :game_reply, only: [:destroy]
+
   end
+
   scope module: 'public' do
     root to: "homes#top"
     resources :games do

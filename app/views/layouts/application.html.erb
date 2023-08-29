@@ -12,7 +12,7 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-white">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
           <a class="navbar-brand" href="/">
             <span>board-game.fun</span>
@@ -24,52 +24,52 @@
             <ul class="navbar-nav ml-auto">
               <% if admin_signed_in? %>
               <li class="nav-item mr-3">
-                <%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-dark nav-link text-dark" %>
+                <%= link_to "会員一覧", admin_customers_path, class: "btn btn-outline-white nav-link text-white" %>
               </li>
               <li class="nav-item mr-3">
-                <%= link_to "投稿一覧", admin_games_path, class: "btn btn-outline-dark nav-link text-dark" %>
+                <%= link_to "投稿一覧", admin_games_path, class: "btn btn-outline-white nav-link text-white" %>
               </li>
 
               <li class="nav-item mr-3">
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark nav-link text-dark" %>
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-white nav-link text-white" %>
               </li>
 
               <% elsif customer_signed_in? %>
               <li class="nav-item mr-5">
-                ようこそ、<strong><%= current_customer.name %></strong>さん！
+                <p class="text-white bg-dark">ようこそ、<strong><%= current_customer.name %></strong>さん！</p>
               </li>
 
               <li class="nav-item mr-3">
-                <%= link_to "マイページ", customer_path(current_customer.id), class: "btn btn-outline-dark nav-link text-dark" %>
+                <%= link_to "マイページ", customer_path(current_customer.id), class: "btn btn-outline-white nav-link text-white" %>
               </li>
 
               <li class="nav-item mr-3">
-                <%= link_to "オススメしよう", new_game_path, class: "btn btn-outline-dark nav-link text-dark" %>
+                <%= link_to "オススメしよう", new_game_path, class: "btn btn-outline-white nav-link text-white" %>
               </li>
 
               <li class="nav-item mr-3">
-                <%= link_to "オススメを探そう", games_path, class: "btn btn-outline-dark nav-link text-dark" %>
+                <%= link_to "オススメを探そう", games_path, class: "btn btn-outline-white nav-link text-white" %>
               </li>
 
               <li class="nav-item mr-3">
-                <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark nav-link text-dark" %>
+                <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-white nav-link text-white" %>
               </li>
 
               <% else %>
               <li class="nav-item mr-3">
-                <%= link_to "TOP", root_path, class: "btn btn-outline-dark nav-link text-dark" %>
+                <%= link_to "TOP", root_path, class: "btn btn-outline-white nav-link text-white" %>
               </li>
 
               <li class="nav-item mr-3">
-                <%= link_to "オススメを探そう", games_path, class: "btn btn-outline-dark nav-link text-dark" %>
+                <%= link_to "オススメを探そう", games_path, class: "btn btn-outline-white nav-link text-white" %>
               </li>
 
               <li class="nav-item mr-3">
-                <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-dark nav-link text-dark" %>
+                <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-white nav-link text-white" %>
               </li>
 
               <li class="nav-item mr-3">
-                <%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-dark nav-link text-dark" %>
+                <%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-white nav-link text-white" %>
               </li>
 
               <% end %>

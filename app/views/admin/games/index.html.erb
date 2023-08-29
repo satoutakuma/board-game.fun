@@ -1,5 +1,5 @@
 <div class="col-md-8 offset-md-1">
-	<%= form_tag sort_by_players_range_games_path, method: :get do %>
+	<%= form_tag sort_by_players_range_admin_games_path, method: :get do %>
 	  最小参加人数：<%= number_field_tag :min_players %>
 	  最大参加人数：<%= number_field_tag :max_players %>
 	  <%= submit_tag "絞り込む" %>
