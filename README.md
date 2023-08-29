@@ -30,7 +30,7 @@
 - ソート機能によって需要に合ったボードゲームを探したいとき
 ​
 ## 設計書
-「使用検討中です」
+ER図https://app.diagrams.net/#G1rSkylDR_McT1hPmAqh7rBiZHyUcsnslN
 ​
 ## 開発環境
 - OS：Linux(CentOS)
